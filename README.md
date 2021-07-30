@@ -22,6 +22,20 @@ Scenario: Alice publishes messages to her personal timeline.
         "I love the weather today."
 ```
 
-Then the test passed!
-
 ![some TDD code](img/publish.png)
+
+### Timeline
+
+The next prompt gave me a chance to use node-time-ago, glad to have it!
+
+```
+Scenario: Alice views Bob's timeline.
+    Given Bob has published "Darn! We lost!"
+    And Bob has published "Good game though."
+    When Alice views Bob's timeline
+    Then Alice sees:
+        Good game though. (1 minute ago)
+        Darn! We lost! (2 minute ago)
+```
+
+![some more TDD](img/timeline.png)
