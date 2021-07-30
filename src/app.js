@@ -18,10 +18,6 @@ class User {
     publish(...args) {
         this.timeline.push(new Post(...args));
     }
-    // view own timeline
-    reflect() {
-        return this.timeline.map(p => p.content);
-    }
     display() {
         return this.timeline.map(p => p.display())
     }
