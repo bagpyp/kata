@@ -6,8 +6,10 @@ class User {
         this.timeline = [];
         this.following = [this];
     }
-    publish(...args) {
-        this.timeline.push(new Post(this.name, ...args));
+    publish(content) {
+        var post = new Post(content);
+        post.author = this.name;
+        this.timeline.push(post);
     }
     view(...otherUsers) {
         const result = otherUsers
@@ -23,13 +25,14 @@ class User {
 }
 
 class Post {
-    constructor(author, content, time = new Date()) {
-        this.author = author
+    constructor(content) {
         this.content = content;
-        this.time = time;
+        this.time = new Date();
     }
     display() {
-        return `${this.author} - ${this.content} (${timeAgo(this.time)})`
+        return `${this.author || '?'} - `
+            + `${this.content} `
+            + `(${timeAgo(this.time)})`;
     }
 }
 
