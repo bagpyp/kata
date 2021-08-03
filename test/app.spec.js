@@ -5,7 +5,7 @@ describe('Feature: Publish', () => {
     it("should return a user's own timeline as a list of strings", () => {
         const alice = new User('Alice');
         alice.publish("I love the weather today!");
-        const result = alice.display();
+        const result = alice.view(alice);
         console.log(result);
         assert.equal(result[0], "Alice - I love the weather today! (just now)");
     });

@@ -27,11 +27,6 @@ class User {
             new Post(this.name, ...args)
         );
     }
-    display() {
-        return this.timeline.map(
-            p => p.display()
-        );
-    }
     view(...otherUsers) {
         const result = otherUsers
             .map(u => u.timeline)
