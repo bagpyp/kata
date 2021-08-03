@@ -14,7 +14,8 @@
   "scripts": {
     "main": "node src/app.js",
     "test": "mocha",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc npm run test",
+    "coverage-report": "nyc --reporter=html npm run test"
   },
   "keywords": [
     "alice",
