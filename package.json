@@ -8,11 +8,13 @@
   },
   "dependencies": {
     "mocha": "^9.0.3",
-    "node-time-ago": "^1.0.0"
+    "node-time-ago": "^1.0.0",
+    "nyc": "^15.1.0"
   },
   "scripts": {
     "main": "node src/app.js",
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "nyc npm run test"
   },
   "keywords": [
     "alice",
