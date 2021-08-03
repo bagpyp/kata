@@ -10,6 +10,14 @@ npm i
 npm run test
 ```
 
+## Test 
+
+To generate a coverage report, run 
+```
+npm run coverage-report
+```
+And open coverage/index.html in your browser
+
 ### Publishing
 
 The below requirements prompted me to write test case before I even opened app.js
