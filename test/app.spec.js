@@ -1,6 +1,9 @@
 const assert = require('assert');
 const { expect } = require('chai');
+const sinon = require("sinon");
 const { User } = require('../src/app.js');
+
+var clock = sinon.useFakeTimers(Date.now());
 
 describe('Feature: Publish', () => {
     it("should return a user's own timeline as a list of strings", () => {
@@ -16,8 +19,10 @@ describe('Feature: Timeline', () => {
     it("should let one user view another's timeline", () => {
         const alice = new User('Alice');
         const bob = new User('Bob');
-        bob.publish('Darn! We Lost!', time = new Date(Date.now() - 2 * 60 * 1000));
-        bob.publish('Good game though.', time = new Date(Date.now() - 60 * 1000));
+        bob.publish('Darn! We Lost!');
+        clock.tick(60 * 1000);
+        bob.publish('Good game though.');
+        clock.tick(60 * 1000);
         const result = alice.view(bob);
         console.log(result);
         assert.equal(result[0], 'Bob - Darn! We Lost! (2 minutes ago)');
@@ -30,15 +35,14 @@ describe('Feature: Following', () => {
         const alice = new User('Alice');
         const bob = new User('Bob');
         const charlie = new User('Charlie');
-        alice.publish("I love the weather today!", new Date(Date.now() - 5 * 60 * 1000));
-        // deliberately publish Bob's posts in reverse-time order
-        bob.publish('Good game though', time = new Date(Date.now() - 60 * 1000))
-        bob.publish('Darn! We Lost!', time = new Date(Date.now() - 2 * 60 * 1000));
-        // ensure this order is reverse-time
-        assert.equal(bob.timeline[0].display(),'Bob - Good game though (a minute ago)');
-        assert.equal(bob.timeline[1].display(),'Bob - Darn! We Lost! (2 minutes ago)');
-        charlie.publish("I'm in New York today! Anyone wants to have a coffee?", 
-            time = new Date(Date.now() - 15 * 1000));
+        alice.publish("I love the weather today!");
+        clock.tick(3 * 60 * 1000);
+        bob.publish('Darn! We Lost!');
+        clock.tick(60 * 1000);
+        bob.publish('Good game though');
+        clock.tick(60 * 1000);
+        charlie.publish("I'm in New York today! Anyone wants to have a coffee?");
+        clock.tick(15 * 1000);
         charlie.follow(alice);
         charlie.follow(bob);
         const result = charlie.view(...charlie.following);
