@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { expect } = require('chai');
 const { User } = require('../src/app.js');
 
 describe('Feature: Publish', () => {
@@ -43,9 +44,11 @@ describe('Feature: Following', () => {
         const result = charlie.view(...charlie.following);
         console.log(result);
         // test sorting and visibility
-        assert.equal(result[0], 'Alice - I love the weather today! (5 minutes ago)');
-        assert.equal(result[1], 'Bob - Darn! We Lost! (2 minutes ago)');
-        assert.equal(result[2], 'Bob - Good game though (a minute ago)');
-        assert.equal(result[3], "Charlie - I'm in New York today! Anyone wants to have a coffee? (just now)");
+        expect(result).to.be.eql([
+            'Alice - I love the weather today! (5 minutes ago)',
+            'Bob - Darn! We Lost! (2 minutes ago)',
+            'Bob - Good game though (a minute ago)',
+            "Charlie - I'm in New York today! Anyone wants to have a coffee? (just now)"
+        ]);
     })
 })
