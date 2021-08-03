@@ -1,5 +1,4 @@
 const assert = require('assert');
-const { defaultTo } = require('lodash');
 const { User } = require('../src/app.js');
 
 describe('Feature: Publish', () => {
