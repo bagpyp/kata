@@ -23,16 +23,13 @@ class User {
         this.following = [this];
     }
     publish(...args) {
-        this.timeline.push(
-            new Post(this.name, ...args)
-        );
+        this.timeline.push(new Post(this.name, ...args));
     }
     view(...otherUsers) {
         const result = otherUsers
             .map(u => u.timeline)
             .reduce((a,b) => a.concat(b))
-            .sort((m,n) => 
-                m.time > n.time ? 1 : -1)
+            .sort((m,n) => m.time > n.time ? 1 : -1)
             .map(p => p.display())
         return result;
     }
