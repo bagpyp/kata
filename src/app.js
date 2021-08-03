@@ -1,20 +1,4 @@
-var timeAgo = require('node-time-ago');
-
-class Post {
-    constructor(
-            author, 
-            content, 
-            time = new Date()) {
-        this.author = author
-        this.content = content;
-        this.time = time;
-    }
-    display() {
-        return `${this.author} `
-        + `- ${this.content} `
-        + `(${timeAgo(this.time)})`
-    }
-}
+const timeAgo = require('node-time-ago');
 
 class User {
     constructor(name) {
@@ -35,6 +19,17 @@ class User {
     }
     follow(otherUser) {
         this.following.push(otherUser)
+    }
+}
+
+class Post {
+    constructor(author, content, time = new Date()) {
+        this.author = author
+        this.content = content;
+        this.time = time;
+    }
+    display() {
+        return `${this.author} - ${this.content} (${timeAgo(this.time)})`
     }
 }
 
