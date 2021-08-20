@@ -1,4 +1,3 @@
-const timeAgo = require('node-time-ago');
 
 class User {
     constructor(name) {
@@ -31,9 +30,9 @@ class Post {
     }
     display() {
         return `${this.author || '?'} - `
-            + `${this.content} `
-            + `(${timeAgo(this.time)})`;
+            + `${this.content}`;
     }
 }
 
 exports.User = User;
+exports.Post = Post;
